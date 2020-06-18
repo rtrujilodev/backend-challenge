@@ -4,8 +4,8 @@
 
 ## Desafio
 
-> Considere o seguinte cenário hipotético onde nosso cliente deseja desenvolver uma plataforma para coleta de dados corporativos de seus colaboradores a fim de criar uma base profissional dos envolvidos via preenchimento de um formulário WEB.
-É de interesse do cliente que os colaboradores cadastrados na base sejam redirecionados para uma página contendo suas credenciais de acesso logo após o cadastro realizado com sucesso para que seja possível realizar a edição de seus dados cadastrais em acessos futuros.
+> Considere o seguinte cenário hipotético onde nosso cliente deseja desenvolver uma plataforma para coleta de dados corporativos de seus colaboradores a fim de criar uma base profissional dos envolvidos via preenchimento de um formulário que deve ser realizado através de uma collection do Postman ou página WEB (opcional).
+É de interesse do cliente que os colaboradores cadastrados na base recebam como resposta via Postman ou sejam redirecionados para uma página WEB (opcional) contendo suas credenciais de acesso logo após o cadastro realizado com sucesso para que seja possível realizar a edição de seus dados cadastrais em acessos futuros.
 Para esta aplicação nosso cliente exige uma infraestrutura serverless altamente escalável com baixo custo. Nosso cliente já utiliza serviços AWS e sugeriu o uso de AWS Lambda a fim de manter sua arquitetura dentro de um mesmo contexto de trabalho.
 
 
@@ -16,7 +16,7 @@ Para esta aplicação nosso cliente exige uma infraestrutura serverless altament
 * O banco de dados utilizado deve ser relacional e os dados devem ser manipulados via ORM, de preferência utilizar o Sequelize.
 * O banco de dados possui informações pré-definidas pelo cliente que devem ser populadas através de arquivos seeders e a sua criação direcionada por arquivos migrations, a manipulação de dados diretamente na base para esta aplicação deve ser evitada.
 * Dados sensíveis como IDs do banco de dados não devem trafegar de maneira exposta entre as requisições, para a proteção deste tipo de informação sugerimos o uso de padrão JSON Web Token para criptografar este tipo dado utilizando uma chave privada que deve ser armazenada no arquivo de ambiente da aplicação no servidor.
-* Os formulários de entrada podem ser criados utilizando JavaScript, jQuery, Angular, React ou outra plataforma que o candidato se sinta familiarizado.
+* Os formulários de entrada devem ser criados via collection do Postman ou com um front-end WEB (opcional) utilizando JavaScript, jQuery, Angular, React ou outra plataforma que o candidato se sinta familiarizado.
 
 ## Formulário de Acesso
 
