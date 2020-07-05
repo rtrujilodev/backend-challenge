@@ -31,10 +31,22 @@ module.exports = {
       type_position_id: {
         type: Sequelize.DataTypes.INTEGER.UNSIGNED,
         allowNull: false,
+        references: {
+          model: {
+            tableName: 'type_positions',
+          },
+          key: 'id'
+        },
       },
       type_phone_id: {
         type: Sequelize.DataTypes.INTEGER.UNSIGNED,
         allowNull: false,
+        references: {
+          model: {
+            tableName: 'type_phones',
+          },
+          key: 'id'
+        },
       },
       phone_number: {
         type: Sequelize.DataTypes.STRING(11),
@@ -43,10 +55,14 @@ module.exports = {
       social_network_id: {
         type: Sequelize.DataTypes.INTEGER.UNSIGNED,
         allowNull: false,
+        references: {
+          model: {
+            tableName: 'social_networks',
+          },
+          key: 'id'
+        },
       },
     })
-
-
   },
 
   down: async (queryInterface, Sequelize) => {
