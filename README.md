@@ -59,7 +59,8 @@ Para esta aplicação nosso cliente exige uma infraestrutura serverless altament
 
 ## Instalação
 
->Utilize este espaço para nos instruir de forma intuitiva a instalar recursos e executar procedimentos necessários para que sua aplicação seja reproduzida com sucesso.
+##### Clone o repositorio e execute os seguintes comandos:
+`yarn install && yarn sequelize db:migrate && yarn sequelize db:seed:all` 
 
 ## Casos de uso
 
