@@ -1,4 +1,12 @@
+const bcrypt = require('bcrypt')
+const { v4: uuidv4 } = require('uuid');
+
 module.exports = (Sequelize, DataTypes) => {
+
+  const hashPassword = async (instance, optons) => {
+    instance.password = await bcrypt.hash(instance.password, 10)
+  }
+
   const User = Sequelize.define('User', {
     uuid: {
       type: DataTypes.UUID,
@@ -26,6 +34,9 @@ module.exports = (Sequelize, DataTypes) => {
     password: {
       type: DataTypes.STRING,
       allowNull: false,
+      // set(value) {
+      //   this.setDataValue('password', await bcrypt.hash(value, 10));
+      // },
     },
     type_position_id: {
       type: DataTypes.INTEGER.UNSIGNED,
@@ -65,7 +76,24 @@ module.exports = (Sequelize, DataTypes) => {
     tableName: 'users',
     freezeTableName: true,
     timestamps: false,
+    hooks: {
+      beforeCreate: hashPassword,
+      beforeUpdate: hashPassword
+    },
   });
+
+  // User.beforeCreate(function (model, options, cb) {
+  //   debug('Info: ' + 'Storing the password');
+  //   model.generateHash(model.password, function (err, encrypted) {
+  //     if (err) return cb(err);
+  //     debug('Info: ' + 'getting ' + encrypted);
+
+  //     model.password = encrypted;
+  //     debug('Info: ' + 'password now is: ' + model.password);
+  //     return cb(null, options);
+  //   });
+  // });
+  // User.beforeCreate(user => user.uuid = uuidv4());
 
 
 
