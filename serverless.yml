@@ -23,9 +23,8 @@ org: richarddaros
 provider:
   name: aws
   runtime: nodejs12.x
-
-# you can overwrite defaults here
-#  stage: dev
+  stage: app
+# you can overwrite defaults here  
 #  region: us-east-1
 
 # you can add statements to the Lambda function's IAM Role here
@@ -58,18 +57,25 @@ provider:
 #    - exclude-me-dir/**
 
 functions:
-  hello:
+  user:
     handler: src/lambda.handler
-#    The following are a few example events you can configure
-#    NOTE: Please make sure to change your handler code to work with those events
-#    Check the event documentation for details
+    path: /
+    events:
+      - http:
+          path: user/{uuid}
+          method: get
+      - http:
+          path: user
+          method: post
+      - http:
+          path: user
+          method: put
+  session:
+    handler: src/lambda.handler
     events:
       - http:
           path: login
           method: post
-      - http:
-          path: user/{uuid}
-          method: get
 #      - websocket: $connect
 #      - s3: ${env:BUCKET}
 #      - schedule: rate(10 minutes)
