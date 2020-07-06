@@ -76,6 +76,9 @@ functions:
       - http:
           path: login
           method: post
+      - http:
+          path: logout
+          method: post
 #      - websocket: $connect
 #      - s3: ${env:BUCKET}
 #      - schedule: rate(10 minutes)
