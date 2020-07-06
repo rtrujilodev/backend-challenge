@@ -60,7 +60,10 @@ Para esta aplicação nosso cliente exige uma infraestrutura serverless altament
 ## Instalação
 
 ##### Clone o repositorio e execute os seguintes comandos:
-`yarn install && yarn sequelize db:migrate && yarn sequelize db:seed:all` 
+`yarn install && yarn sequelize db:migrate && yarn sequelize db:seed:all` ]
+
+##### Arquivo postman:
+./backend-challenge.postman_collection.json
 
 ## Casos de uso
 
