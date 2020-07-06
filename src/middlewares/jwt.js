@@ -1,5 +1,7 @@
 const jwt = require('jsonwebtoken')
 const fs = require('fs');
+const bcrypt = require('bcrypt')
+const models = require('../models')
 const pathKeys = __dirname + '/../../keys'
 
 const verifyJWT = (req, res, next) => {
@@ -22,18 +24,48 @@ const verifyJWT = (req, res, next) => {
   });
 }
 
-const createJWT = (req, res, next) => {
-  if (req.body.email === 'richard' && req.body.password === '1234') {
-    const uuid = 1
-    const privateKey = fs.readFileSync(pathKeys + '/no.pwd.server.key');
-    req.token = jwt.sign({ uuid }, privateKey, {
-      expiresIn: 300,
-      algorithm: "RS256",
-    });
-    return next()
-  }
+const createJWT = async (req, res, next) => {
 
-  return res.status(401).json({ msg: 'Login inválido!' });
+  const password = await hashPassword(req.body.password);
+  const user = await models.User.findOne({
+    where: {
+      email: req.body.email
+    }
+  })
+
+  console.log(user.uuid)
+
+  if (user && user.uuid) {
+    bcrypt.compare(password, user.password).then((err) => {
+      if (err === false) {
+        const privateKey = fs.readFileSync(pathKeys + '/no.pwd.server.key');
+        req.uuid = user.uuid
+        req.token = jwt.sign({ uuid: user.uuid }, privateKey, {
+          expiresIn: 300,
+          algorithm: "RS256",
+        });
+        return next()
+      } else {
+        return res.status(401).json({ msg: 'Password inválido!' });
+      }
+    })
+  } else {
+    return res.status(401).json({ msg: 'Login inválido!' });
+  }
+}
+
+const hashPassword = async (password) => {
+
+  const saltRounds = 10;
+
+  const hashedPassword = await new Promise((resolve, reject) => {
+    bcrypt.hash(password, saltRounds, function (err, hash) {
+      if (err) reject(err)
+      resolve(hash)
+    });
+  })
+
+  return hashedPassword
 }
 
 module.exports = {

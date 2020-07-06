@@ -7,7 +7,7 @@ router.post('/logout', (req, res, next) => {
 })
 
 router.post('/login', mdJWT.createJWT, (req, res, next) => {
-  res.status(200).json({ token: req.token })
+  res.status(200).json({ token: req.token, uuid: req.uuid })
 })
 
 module.exports = router
