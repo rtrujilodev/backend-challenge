@@ -10,6 +10,7 @@ module.exports = (Sequelize, DataTypes) => {
     name: {
       type: DataTypes.STRING(100),
       allowNull: false,
+      is: ["^[a-z]+$", 'i']
     },
     cpf: {
       type: DataTypes.STRING(11),
@@ -19,6 +20,7 @@ module.exports = (Sequelize, DataTypes) => {
     email: {
       type: DataTypes.STRING(100),
       unique: true,
+      isEmail: true,
       allowNull: false,
     },
     password: {
@@ -64,6 +66,8 @@ module.exports = (Sequelize, DataTypes) => {
     freezeTableName: true,
     timestamps: false,
   });
+
+
 
   return User;
 }

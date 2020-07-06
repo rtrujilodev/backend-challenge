@@ -26,46 +26,28 @@ const verifyJWT = (req, res, next) => {
 
 const createJWT = async (req, res, next) => {
 
-  const password = await hashPassword(req.body.password);
   const user = await models.User.findOne({
     where: {
       email: req.body.email
     }
   })
 
-  console.log(user.uuid)
-
   if (user && user.uuid) {
-    bcrypt.compare(password, user.password).then((err) => {
-      if (err === false) {
-        const privateKey = fs.readFileSync(pathKeys + '/no.pwd.server.key');
-        req.uuid = user.uuid
-        req.token = jwt.sign({ uuid: user.uuid }, privateKey, {
-          expiresIn: 300,
-          algorithm: "RS256",
-        });
-        return next()
-      } else {
-        return res.status(401).json({ msg: 'Password inválido!' });
-      }
-    })
+    const compare = await bcrypt.compare(req.body.password, user.password)
+    if (compare === true) {
+      const privateKey = fs.readFileSync(pathKeys + '/no.pwd.server.key');
+      req.uuid = user.uuid
+      req.token = jwt.sign({ uuid: user.uuid }, privateKey, {
+        expiresIn: 300,
+        algorithm: "RS256",
+      });
+      return next()
+    } else {
+      return res.status(401).json({ msg: 'Password inválido!' });
+    }
   } else {
     return res.status(401).json({ msg: 'Login inválido!' });
   }
-}
-
-const hashPassword = async (password) => {
-
-  const saltRounds = 10;
-
-  const hashedPassword = await new Promise((resolve, reject) => {
-    bcrypt.hash(password, saltRounds, function (err, hash) {
-      if (err) reject(err)
-      resolve(hash)
-    });
-  })
-
-  return hashedPassword
 }
 
 module.exports = {
