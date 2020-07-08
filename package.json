@@ -1,0 +1,28 @@
+{
+  "name": "backend-challenge",
+  "version": "1.0.0",
+  "main": "src/app.js",
+  "repository": "https://github.com/richarddaros/backend-challenge.git",
+  "author": "richard daros <richarddaros1@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "dev": "nodemon"
+  },
+  "dependencies": {
+    "aws-serverless-express": "^3.3.8",
+    "bcrypt": "^5.0.0",
+    "cors": "^2.8.5",
+    "dotenv-safe": "^8.2.0",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "mysql2": "^2.1.0",
+    "sequelize": "^6.3.0",
+    "slspress": "^2.2.5",
+    "uuid": "^8.2.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4",
+    "sequelize-cli": "^6.2.0",
+    "serverless-offline": "^6.4.0"
+  }
+}
