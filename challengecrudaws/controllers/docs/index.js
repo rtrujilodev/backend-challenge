@@ -1,0 +1,133 @@
+'use strict';
+
+module.exports = async (req,res) => {
+    res.json({
+        titulo:"Documentação",
+        topicos:{
+            APIs:{
+                documentos:"http(s)://url:8191",
+                rotas:{
+                    cadastroLogin:{
+                        verbo:"POST",
+                        metodo:"JSON",
+                        rota:"http(s)://url:8191/auth/register",
+                        parametros:{
+                            corpoHTML:['name', 'email', 'password']
+                        }
+                    },
+                    autenticar:{
+                        verbo:"POST",
+                        metodo:"JSON",
+                        rota:"http(s)://url:8191/auth/authenticate",
+                        parametros:{
+                            corpoHTML:['email','password']
+                        }
+                    },
+                    verTudo:{
+                        verbo:"GET",
+                        rota:"http(s)://url:8191/cad"
+                    },
+                    verTodosxEnderecos:{
+                        verbo:"GET",
+                        metodo:"JSON",
+                        rota:"http(s)://url:8191/cad/:id/addresses",
+                        parametros:'id'
+                    },
+                    verTodosxCargos:{
+                        verbo:"GET",
+                        metodo:"JSON",
+                        rota:"http(s)://url:8191/cad/:id/position",
+                        parametros:'id'
+                    },
+                    verTodosxContatos:{
+                        verbo:"GET",
+                        metodo:"JSON",
+                        rota:"http(s)://url:8191/cad/:id/contacts",
+                        parametros:'id'
+                    },
+                    verTodosxRedesSociais:{
+                        verbo:"GET",
+                        metodo:"JSON",
+                        rota:"http(s)://url:8191/cad/:id/socials",
+                        parametros:'id'
+                    },
+                    verTodosFiltroCamposUsuario:{
+                        verbo:"POST",
+                        metodo:"JSON",
+                        rota:"http(s)://url:8191/cad/:filtersval/filter",
+                        parametros:{
+                            rota:'filtersval',
+                            corpoHTML:['name', 'email']
+                        }
+                    },
+                    verTodosRelacionamentosCondicional:{
+                        verbo:"POST",
+                        metodo:"JSON",
+                        rota:"http(s)://url:8191/cad/:relations/where",
+                        parametros:{
+                            rota:{
+                                relations:"Relações: sepearar por |"
+                            },
+                            corpoHTML:{
+                                parametro:['name', 'email', '...'],
+                                tipo:"Quaisquer campos das relações inclusas"
+                            }
+                        }
+                    },
+                    cadastrarEnderecos:{
+                        verbo:"POST",
+                        metodo:"JSON",
+                        rota:"http(s)://url:8191/cad/:id/addresses",
+                        parametros:{
+                            corpoHTML:['street', 'zipcode', 'number', 'neighborhood', 'city', 'state']
+                        }
+                    },
+                    cadastrarContatos:{
+                        verbo:"POST",
+                        metodo:"JSON",
+                        rota:"http(s)://url:8191/cad/:id/contacts",
+                        parametros:{
+                            corpoHTML:['pohne', 'cell', 'whatsapp']
+                        }
+                    },
+                    cadastrarRedesSociais:{
+                        verbo:"POST",
+                        metodo:"JSON",
+                        rota:"http(s)://url:8191/cad/:id/contacts/socials",
+                        parametros:{
+                            corpoHTML:['facebook', 'instagram', 'linkedin', 'pinterest']
+                        }
+                    },
+                    uploadFotoPerfil:{
+                        verbo:"POST",
+                        metodo:"multiform-data",
+                        rota:"http(s)://url:8191/cad/uploads",
+                        parametros:{
+                            formulario:{
+                                parametro:'file',
+                                tipo:'Arquivo'
+                            }
+                        }
+                    },
+                    atualizarUsuario:{
+                        verbo:"PATCH",
+                        metodo:"JSON",
+                        rota:"http(s)://url:8191/cad",
+                        parametros:{
+                            rota:'id',
+                            corpoHTML:['name', 'email']
+                        }
+                    },
+                    excluirUsuario:{
+                        verbo:"DELETE",
+                        metodo:"JSON",
+                        rota:"http(s)://url:8191/cad",
+                        parametros:{
+                            corpoHTML:'id'
+                        }
+                    }
+                }
+            }
+        }
+    });
+}
